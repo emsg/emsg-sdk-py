@@ -9,7 +9,7 @@ Created on 2014年11月28日
 from EmsgClient import Client
 import time,uuid
 
-host = "192.168.2.230"
+host = "127.0.0.1"
 port = 4222
 
 class Conn:
@@ -17,7 +17,7 @@ class Conn:
         client = Client(host, port)
         client.setHeartBeat(50)
         client.setListener(self.callback)
-        jid = "ccll_pytest_%s@test.com" % i
+        jid = "pycli%s@test.com" % i
         print jid
         client.auth(jid, "123")
         self.client = client
@@ -30,16 +30,16 @@ class Conn:
 
 if __name__ == '__main__':
     cl = []
-    for i in range(0,10000):
+    for i in range(0,1):
         conn = None
         del conn
         conn = Conn(i)
         cl.append(conn)
     print 'watt .......... %s ' % cl
-    time.sleep(3)
+    time.sleep(2)
     
     while True :
-        time.sleep(10) 
         for c in cl :
-            c.getClient().sendMessage(to="%s@test.com" % uuid.uuid4().hex,content="hello world.")
-        
+            c.getClient().sendMessage(to="%s@test.com" % 'foobar',content="hello world.")
+        time.sleep(10000)
+
